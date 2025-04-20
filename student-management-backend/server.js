@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -12,23 +11,22 @@ connectDB();
 
 const app = express();
 
-// Middleware
-app.use(express.json());
+// Middleware - Remove duplicate express.json()
 app.use(express.json());
 app.use(cors({
-  origin: 'https://wt-assignment-2.vercel.app' // Your frontend URL
+  origin: ['https://wt-assignment-2.vercel.app'] // Array format for multiple origins
 }));
 
 // Routes
 app.use('/api/students', require('./routes/studentRoutes'));
 
-// Base route
-app.get('/', (req, res) => {
-  res.send('API is running...');
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK' });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000; // Must match Render's PORT variable
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
 });
