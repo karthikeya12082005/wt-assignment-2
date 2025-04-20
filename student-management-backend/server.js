@@ -1,3 +1,4 @@
+// student-management-backend/server.js
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -11,22 +12,24 @@ connectDB();
 
 const app = express();
 
-// Middleware - Remove duplicate express.json()
-app.use(express.json());
+// Middleware
 app.use(cors({
-  origin: ['https://wt-assignment-2.vercel.app'] // Array format for multiple origins
+  origin: ['https://wt-assignment-2.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
 // Routes
 app.use('/api/students', require('./routes/studentRoutes'));
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'OK' });
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    status: 'API is running',
+    docs: '/api-docs' // If you have documentation
+  });
 });
 
-const PORT = process.env.PORT || 10000; // Must match Render's PORT variable
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
