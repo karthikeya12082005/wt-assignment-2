@@ -14,7 +14,10 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(express.json());
+app.use(cors({
+  origin: 'https://wt-assignment-2.vercel.app' // Your frontend URL
+}));
 
 // Routes
 app.use('/api/students', require('./routes/studentRoutes'));
