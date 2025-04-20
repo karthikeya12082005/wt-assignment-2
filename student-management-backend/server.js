@@ -12,18 +12,22 @@ connectDB();
 
 const app = express();
 
-app.use(cors({
+const corsOptions = {
   origin: [
     'https://wt-assignment-2.vercel.app',
-    'https://wt-assignment-2-9zy67mivn-kasam-revan-sai-karthikeyas-projects.vercel.app'
+    'https://wt-assignment-2-*.vercel.app' // Wildcard for all preview deployments
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+  credentials: true,
+  optionsSuccessStatus: 200 // For legacy browser support
+};
 
-// Handle preflight requests
-app.options('*', cors());
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Explicitly handle OPTIONS requests
+app.options('*', cors(corsOptions))
 
 // Routes
 app.use('/api/students', require('./routes/studentRoutes'));
