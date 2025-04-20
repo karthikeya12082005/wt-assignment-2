@@ -1,3 +1,6 @@
+// studentController.js
+// student-management-backend/controllers/studentController.js
+
 const Student = require('../models/Student');
 
 // @desc    Get all students
