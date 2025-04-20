@@ -25,7 +25,7 @@ const StudentForm = ({ isEditing = false }) => {
       const getStudentData = async () => {
         try {
           setLoading(true);
-          const response = await axios.get(`http://localhost:5000/api/students/${id}`);
+          const response = await axios.get(`https://student-management-backend-s2a1.onrender.com/api/students/${id}`);
           const student = response.data;
           setFormData({
             ...student,
@@ -57,9 +57,9 @@ const StudentForm = ({ isEditing = false }) => {
       setLoading(true);
       
       if (isEditing) {
-        await axios.put(`http://localhost:5000/api/students/${id}`, formData);
+        await axios.put(`https://student-management-backend-s2a1.onrender.com/api/students/${id}`, formData);
       } else {
-        await axios.post('http://localhost:5000/api/students', formData);
+        await axios.post('https://student-management-backend-s2a1.onrender.com/api/students', formData);
       }
       
       setLoading(false);
