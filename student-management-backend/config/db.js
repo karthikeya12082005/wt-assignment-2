@@ -1,3 +1,6 @@
+
+// student-management-backend/config/db.js
+
 const mongoose = require('mongoose');
 
 const connectDB = async () => {
@@ -10,4 +13,5 @@ const connectDB = async () => {
   }
 };
 
+// Must export like this
 module.exports = connectDB;
