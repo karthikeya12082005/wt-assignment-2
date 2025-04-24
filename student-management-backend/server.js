@@ -17,7 +17,7 @@ app.use(cors({
   origin: ['https://wt-assignment-2.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
-
+app.use(express.json());
 // Routes
 app.use('/api/students', require('./routes/studentRoutes'));
 
